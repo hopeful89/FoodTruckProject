@@ -3,69 +3,88 @@ package com.skilldistillery.app;
 import java.util.Scanner;
 
 public class User {
-	Scanner input;
 
 	public User(Scanner input) {
-		this.input = input;
 	}
 
-	public FoodTruck addFoodTruck() {
+	// Prompts and records user input to create new food truck
+
+	public FoodTruck addFoodTruck(TextPrinter printer, Scanner input) {
 
 		String name;
 		String foodType;
 		String userChoice;
-		int rating = 0;
+		double rating = 0;
 		boolean isValid = false;
 
-		System.out.print("Please enter truck name or quit: ");
-		userChoice = input.nextLine();
+		printer.enterTruckInfo("name");
+		userChoice = userStringChoice(input);
+
+		// Choose to stop making trucks
 
 		if (userChoice.equalsIgnoreCase("Q") || userChoice.equalsIgnoreCase("Quit")) {
-			System.out.println();
-			System.out.println("You have quit entering food trucks! Moving to menu.");
-			System.out.println();
+			printer.stopEnteringTruckNames();
 			return null;
 		} else {
 			name = userChoice;
 		}
-		System.out.print("Please enter truck food type: ");
-		foodType = input.nextLine();
+		printer.enterTruckInfo("food");
+		foodType = userStringChoice(input);
+
+		// Only isValid when data is between 0 - 5
 
 		while (isValid == false) {
-			System.out.print("Please enter your rating 0-5: ");
-			rating = input.nextInt();
-			//flush
+			printer.enterTruckRating();
+			rating = userIntChoice(input);
+
+			// flush the return
+
 			input.nextLine();
+
 			if (rating < 0 || rating > 5) {
-				System.out.println("Please read allowed input");
+				printer.errorMessage("invalid");
 			} else {
 				isValid = true;
 			}
 		}
 
+		// New Truck returned to be added
+
 		return new FoodTruck(name, foodType, rating);
 	}
-
-	public void existingFoodTrucks(FoodTruck[] foodTruck) {
-		for(int i = 0; i < foodTruck.length; i++) {
-			if(foodTruck[i] != null) {
-				//Write a better output for these in the foodtruck
-				System.out.println(foodTruck[i].getTruckName());
-			}
+	
+	public void existingTrucks(FoodTruck[] foodTruck) {
+		for (FoodTruck truck : foodTruck) {
+			System.out.println(truck.toString());
 		}
 	}
 
+	// Average rating of all listed food trucks
+
 	public void averageRating(FoodTruck[] foodTruck) {
-		System.out.println("Average Rating");
+		double sum = 0;
+		for (FoodTruck truck : foodTruck) {
+			sum += truck.getRating();
+		}
+		System.out.println("Average Rating: " + (sum / foodTruck.length));
 
 	}
+
+	// Highest rated food truck or trucks
 
 	public void highestRating(FoodTruck[] foodTruck) {
 		System.out.println("Highest Rated");
 	}
 
-	public int userChoice() {
-		int userChoice = input.nextInt();
+	// Used to get input based on type
+
+	public double userIntChoice(Scanner input) {
+		double userChoice = input.nextInt();
+		return userChoice;
+	}
+
+	public String userStringChoice(Scanner input) {
+		String userChoice = input.nextLine();
 		return userChoice;
 	}
 

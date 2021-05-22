@@ -4,88 +4,118 @@ import java.util.Scanner;
 
 public class FoodTruckApp {
 	private FoodTruck[] foodTrucks;
-	private Scanner input = new Scanner(System.in);
+
 
 	public FoodTruckApp(int numOfTrucks) {
 		foodTrucks = new FoodTruck[numOfTrucks];
 	}
 
 	public static void main(String[] args) {
-
-		// Instantiate new App to call run(), Allocate space for 10 trucks.
+		// Required to get user input
+		Scanner input = new Scanner(System.in);
+		
+		//Calls most printed text in application
+		TextPrinter printer = new TextPrinter();
+		
+		// Instantiate FoodTruckApp to call for newFoodTrucks()
+		// Allocate space for 5 trucks.
 		FoodTruckApp foodApp = new FoodTruckApp(5);
-		User newUser = new User(foodApp.input);
+		
+		//Create User instance
+		User newUser = new User(input);
+		
 
-		// Call run and pass array reference to user
+		// App Start
+		foodApp.newFoodTrucks(newUser, foodApp.foodTrucks, printer, input);
 
-		foodApp.start(newUser);
-		foodApp.menuOption(newUser);
+		// Present menu after truck completion
+		foodApp.menuOption(newUser, printer, input, foodApp.foodTrucks);
 
-		foodApp.input.close();
+		//close scanner
+		input.close();
 	}
 
-	public void start(User newUser) {
-		newFoodTrucks(newUser, foodTrucks);
-	}
 
-	public void newFoodTrucks(User user, FoodTruck[] foodTrucks) {
+	public void newFoodTrucks(User user, FoodTruck[] foodTrucks, TextPrinter printer, Scanner input) {
 		int count = 0;
 
-		System.out.println("Welcome to the Food Truck rating system.\n\n");
-		System.out.println("\tI need the name,\n\t   food type,\n    and rating of the truck");
+		//startText
+		printer.welcomeToApp();
 
 		while (true && count < foodTrucks.length) {
-			FoodTruck newTruck = user.addFoodTruck();
+			
+			//Creates a new truck based on user input
+			FoodTruck newTruck = user.addFoodTruck(printer, input);
+			
+			//When user quits truck returns null
 			if (newTruck == null) {
 				break;
 			} else {
+			
+			//Valid information adds a new truck
 				foodTrucks[count] = newTruck;
 			}
 			count++;
 		}
+		
 		if(count + 1 == foodTrucks.length) {
-			System.out.println("Max count reached. Moving to menu!");
+			printer.errorMessage("maxCount");
 		}
 
 	}
 	
-	public void menuOption(User user) {
+	public void menuOption(User user, TextPrinter printer, Scanner input, FoodTruck[] foodTruck) {
 		boolean choosingOptions = true;
 		
+		FoodTruck[] validTrucks = validTruckArray(foodTruck);
+		
 		do {
-			menuPrint();
-			int userInput = user.userChoice();
+
+			printer.mainMenuPrint();
+			int userInput = (int) user.userIntChoice(input);
 			switch(userInput) {
 			case 1:
-				user.existingFoodTrucks(foodTrucks);
+				user.existingTrucks(validTrucks);
 				break;
 			case 2:
-				user.averageRating(foodTrucks);
+				user.averageRating(validTrucks);
 				break;
 			case 3:
-				user.highestRating(foodTrucks);
+				user.highestRating(validTrucks);
 				break;
 			case 4:
-				System.out.println("Thanks for using the app come again!");
+				printer.appExitMessage();
 				choosingOptions = false;
 				break;
 			default:
-				System.out.println("Not a valid response");
+				printer.errorMessage("invalid");
 			}
-			
-			
-			
 		} while (choosingOptions);
 	}
 	
-	public void menuPrint() {
-		System.out.println(" ------------------------------");
-		System.out.println("- 1. List existing food trucks -");
-		System.out.println("- 2. See average rating        -");
-		System.out.println("- 3. Display highest rated     -");
-		System.out.println("- 4. Quit the Program          -");
-		System.out.println(" ------------------------------");
-		System.out.print("Your choice:    ");
+	public FoodTruck[] validTruckArray(FoodTruck[] foodTruck) {
+		
+		int count = 0;
+
+		for (int i = 0; i < foodTruck.length; i++) {
+			if (foodTruck[i] != null) {
+				count++;
+			}
+		}
+		
+		FoodTruck[] validTrucks = new FoodTruck[count];
+		count = 0;
+
+		for (int i = 0; i < foodTruck.length; i++) {
+			if (foodTruck[i] != null) {
+				validTrucks[count] = foodTruck[i];
+				count++;
+			}
+		}
+
+
+		return validTrucks;
+
 	}
 
 }
