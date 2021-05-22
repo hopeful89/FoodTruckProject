@@ -27,7 +27,9 @@ public class TextPrinter {
 			System.out.println("Not a valid response");
 		}
 		if(type.equals("maxCount")) {
+			System.out.println();
 			System.out.println("Max count reached. Moving to menu!");
+			System.out.println();
 		}
 	}
 	

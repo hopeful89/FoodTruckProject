@@ -66,7 +66,9 @@ public class User {
 		for (FoodTruck truck : foodTruck) {
 			sum += truck.getRating();
 		}
-		System.out.println("Average Rating: " + (sum / foodTruck.length));
+		
+		double avg = (sum / foodTruck.length);
+		System.out.printf("Average Rating: %.2f\n", avg);
 	}
 
 	// Highest rated food truck or trucks
