@@ -21,6 +21,7 @@ public class TextPrinter {
 	
 	public void appExitMessage() {
 		System.out.println("Thanks for using the app come again!");
+		System.out.println("The pleasure was all ours!");
 	}
 	
 	public void errorMessage(String type) {

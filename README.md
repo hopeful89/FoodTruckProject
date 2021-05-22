@@ -14,6 +14,7 @@ The food truck project is used in order to enter you favorite(or least favorite)
 
 ### How to Run
 
+
 This is a console project.  To run in eclipse please the run button.
 User will be prompted to enter food truck information.
 
