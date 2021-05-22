@@ -61,6 +61,7 @@ public class User {
 
 	// Average rating of all listed food trucks
 
+
 	public void averageRating(FoodTruck[] foodTruck) {
 		double sum = 0;
 		for (FoodTruck truck : foodTruck) {

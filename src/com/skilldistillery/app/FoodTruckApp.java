@@ -36,7 +36,6 @@ public class FoodTruckApp {
 	public void newFoodTrucks(User user, FoodTruck[] foodTrucks, TextPrinter printer, Scanner input) {
 		int count = 0;
 
-		// startText
 		printer.welcomeToApp();
 		while (true && count < foodTrucks.length) {
 
@@ -62,7 +61,7 @@ public class FoodTruckApp {
 
 	public void menuOption(User user, TextPrinter printer, Scanner input, FoodTruck[] foodTruck) {
 		boolean choosingOptions = true;
-
+		// Array null checked for next operations
 		FoodTruck[] validTrucks = validTruckArray(foodTruck);
 
 		do {
@@ -94,6 +93,7 @@ public class FoodTruckApp {
 		} while (choosingOptions);
 	}
 
+	//Used to return an array of valid non null trucks
 	public FoodTruck[] validTruckArray(FoodTruck[] foodTruck) {
 		// Use count to track number of non null results
 

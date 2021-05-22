@@ -5,6 +5,7 @@ public class TextPrinter {
 	
 	public void welcomeToApp() {
 		System.out.println("Welcome to the Food Truck rating system.\n\n");
+		System.out.println("You may enter up to 5 trucks information\n");
 		System.out.println("\tI need the name,\n\t   food type,\n    and rating of the truck");
 	}
 	

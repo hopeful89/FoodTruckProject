@@ -2,6 +2,7 @@ package com.skilldistillery.app;
 
 public class FoodTruck {
 	
+	//static to increment for unique truckId
 	private static int trucksCreated = 0;
 	private int truckId;
 	private String truckName;
@@ -15,7 +16,8 @@ public class FoodTruck {
 		trucksCreated++;
 		truckId = trucksCreated;
 	}
-
+	//Added setters for future changes
+	
 	public String getTruckName() {
 		return truckName;
 	}
