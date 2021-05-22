@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class User {
 
-	public User(Scanner input) {
+	public User() {
 	}
 
 	// Prompts and records user input to create new food truck

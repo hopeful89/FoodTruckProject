@@ -10,6 +10,7 @@ public class FoodTruckApp {
 	}
 
 	public static void main(String[] args) {
+		
 		// Required to get user input
 		Scanner input = new Scanner(System.in);
 
@@ -21,7 +22,7 @@ public class FoodTruckApp {
 		FoodTruckApp foodApp = new FoodTruckApp(5);
 
 		// Create User instance
-		User newUser = new User(input);
+		User newUser = new User();
 
 		// Application  Start
 		foodApp.newFoodTrucks(newUser, foodApp.foodTrucks, printer, input);
@@ -104,7 +105,7 @@ public class FoodTruckApp {
 				count++;
 			}
 		}
-		// New array based on non null values
+		// New array - no null values
 
 		FoodTruck[] validTrucks = new FoodTruck[count];
 		count = 0;
