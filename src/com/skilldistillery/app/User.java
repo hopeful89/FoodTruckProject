@@ -67,13 +67,18 @@ public class User {
 			sum += truck.getRating();
 		}
 		System.out.println("Average Rating: " + (sum / foodTruck.length));
-
 	}
 
 	// Highest rated food truck or trucks
 
 	public void highestRating(FoodTruck[] foodTruck) {
-		System.out.println("Highest Rated");
+		FoodTruck bestTruck = foodTruck[0];
+		for (FoodTruck nextTruck : foodTruck) {
+			if(nextTruck.getRating() > bestTruck.getRating()) {
+				bestTruck = nextTruck;
+			}
+		}
+		System.out.println("Highest Rated truck I found first: \n" + bestTruck.toString());
 	}
 
 	// Used to get input based on type

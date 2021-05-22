@@ -41,7 +41,6 @@ public class FoodTruckApp {
 
 		//startText
 		printer.welcomeToApp();
-
 		while (true && count < foodTrucks.length) {
 			
 			//Creates a new truck based on user input
@@ -58,7 +57,7 @@ public class FoodTruckApp {
 			count++;
 		}
 		
-		if(count + 1 == foodTrucks.length) {
+		if(count == foodTrucks.length) {
 			printer.errorMessage("maxCount");
 		}
 
@@ -72,6 +71,8 @@ public class FoodTruckApp {
 		do {
 
 			printer.mainMenuPrint();
+			
+			//Cast needed since its a double return
 			int userInput = (int) user.userIntChoice(input);
 			switch(userInput) {
 			case 1:

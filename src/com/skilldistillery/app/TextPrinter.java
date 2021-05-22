@@ -25,7 +25,8 @@ public class TextPrinter {
 	public void errorMessage(String type) {
 		if(type.equals("invalid")) {
 			System.out.println("Not a valid response");
-		}else if(type.equals("maxCount")) {
+		}
+		if(type.equals("maxCount")) {
 			System.out.println("Max count reached. Moving to menu!");
 		}
 	}
