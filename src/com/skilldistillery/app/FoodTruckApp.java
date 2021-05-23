@@ -1,5 +1,6 @@
 package com.skilldistillery.app;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class FoodTruckApp {
@@ -10,7 +11,7 @@ public class FoodTruckApp {
 	}
 
 	public static void main(String[] args) {
-		
+
 		// Required to get user input
 		Scanner input = new Scanner(System.in);
 
@@ -24,7 +25,7 @@ public class FoodTruckApp {
 		// Create User instance
 		User newUser = new User();
 
-		// Application  Start
+		// Application Start
 		foodApp.newFoodTrucks(newUser, foodApp.foodTrucks, printer, input);
 
 		// Present menu after truck completion
@@ -64,22 +65,45 @@ public class FoodTruckApp {
 		boolean choosingOptions = true;
 		// Array null checked for next operations
 		FoodTruck[] validTrucks = validTruckArray(foodTruck);
+		boolean trucksAdded = validTrucks.length != 0;
 
 		do {
 
 			printer.mainMenuPrint();
-
+			int userInput;
 			// Cast needed since its a double return
-			int userInput = (int) user.userIntChoice(input);
+		    try { userInput = (int) user.userIntChoice(input);}
+		    catch (InputMismatchException error) {
+		        userInput = -1;
+		        input.nextLine();
+		    }
+		    
+		      
 			switch (userInput) {
+			
+			//TODO write new method to validate and call userMethods
+			//for all 3 cases validateArrayLength(validTrucks, user)
 			case 1:
-				user.existingTrucks(validTrucks);
+				if(trucksAdded) {
+					user.existingTrucks(validTrucks);
+				}else {
+					printer.errorMessage("noTrucks");
+				}
 				break;
 			case 2:
-				user.averageRating(validTrucks);
+				if(trucksAdded) {
+					user.averageRating(validTrucks);
+				}else {
+					printer.errorMessage("noTrucks");
+				}
 				break;
 			case 3:
-				user.highestRating(validTrucks);
+				if(trucksAdded) {
+					user.highestRating(validTrucks);
+				}else {
+					printer.errorMessage("noTrucks");
+				}
+				
 				break;
 			case 4:
 				printer.appExitMessage();
@@ -94,7 +118,7 @@ public class FoodTruckApp {
 		} while (choosingOptions);
 	}
 
-	//Used to return an array of valid non null trucks
+	// Used to return an array of valid non null trucks
 	public FoodTruck[] validTruckArray(FoodTruck[] foodTruck) {
 		// Use count to track number of non null results
 

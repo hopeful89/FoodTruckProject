@@ -33,6 +33,10 @@ public class TextPrinter {
 			System.out.println("Max count reached. Moving to menu!");
 			System.out.println();
 		}
+		if(type.equals("noTrucks")){
+			System.out.println("\nYou forgot to add trucks.\n");
+		}
+				
 	}
 	
 	public void enterTruckInfo(String type) {
