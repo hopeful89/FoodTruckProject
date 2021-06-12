@@ -82,7 +82,7 @@ public class FoodTruckApp {
 			switch (userInput) {
 			
 			//TODO write new method to validate and call userMethods
-			//for all 3 cases validateArrayLength(validTrucks, user)
+			//for all 3 cases validateArrayLength(FoodTruck[] validTrucks, User user, TextPrinter printer)
 			case 1:
 				if(trucksAdded) {
 					user.existingTrucks(validTrucks);
